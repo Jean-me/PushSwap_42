@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 19:42:25 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/05/08 20:29:05 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/08 23:04:11 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,13 @@ void	make_node(t_stack **a, unsigned int *id_arr, int n)
 int init_validate(int argc, char **argv, int **arr, unsigned int **id_arr, t_stack *a, t_stack *b)
 {
 	int n;
-
 	if (argc < 2)
+	{
 		return (write(2, "Error\n", 6), 2);
+	}
 	n = argc - 1;
-	arr = malloc(sizeof(int) * n);
-	id_arr = malloc(sizeof(unsigned int) * n);
+	*arr = (int *)malloc(sizeof(int) * n);
+	*id_arr = (unsigned int *)malloc(sizeof(unsigned int) * n);
 	if (!(*arr) || !(*id_arr)
 		|| parse_and_store(*arr, argv, argc) || compare_n(*arr, n))
 	{
@@ -105,7 +106,6 @@ int init_validate(int argc, char **argv, int **arr, unsigned int **id_arr, t_sta
 	return (0);
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_stack			*a;
@@ -117,8 +117,10 @@ int	main(int argc, char **argv)
 	n = argc - 1;
 	a = NULL;
 	b = NULL;
-	if (init_validate(argc, argv, &arr, &id_arr, a, b) != 1)
+	if (init_validate(argc, argv, &arr, &id_arr, a, b) != 0)
+	{
 		return (2);
+	}
 	rank_compress(arr, id_arr, n);
 	make_node(&a, id_arr, n);
 	push_and_sort(&a, &b, n);
