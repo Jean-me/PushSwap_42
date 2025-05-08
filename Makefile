@@ -1,10 +1,10 @@
 # push_swap
 NAME = push_swap
-SRCS = main.c arg_check.c atoi.c push.c reverse_r.c rotate.c sort_two_or_three.c swap.c whisper_of_stacks.c graveyard.c
+SRCS = main.c arg_check.c atoi.c push.c reverse_r.c rotate.c sort_two_or_three.c swap.c whisper_of_stacks.c graveyard.c sort_four_five.c
 OBJS = $(SRCS:%.c=%.o)
 # Compiler
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LIB_PRINTF_DIR = ft_printf
 LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 # Header

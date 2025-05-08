@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 19:42:25 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/05/02 18:48:41 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:29:05 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ unsigned int	*rank_compress(int *arr, unsigned int *id_arr, int num)
 
 void	push_and_sort(t_stack **a, t_stack **b, int n)
 {
-	if (n > 3)
+	if (n > 5)
 		radix_sort(a, b);
+	else if (n > 4)
+		sort_five(a, b);
 	else if (n > 2)
 		sort_three(a);
-	else
+	else if (n > 1)
 		sort_two(a);
 }
 
@@ -54,8 +56,8 @@ int	parse_and_store(int *arr, char **argv, int argc)
 {
 	int	i;
 	int	c;
-
 	i = 1;
+	
 	c = 0;
 	while (i < argc)
 	{
@@ -71,7 +73,7 @@ int	parse_and_store(int *arr, char **argv, int argc)
 void	make_node(t_stack **a, unsigned int *id_arr, int n)
 {
 	int	i;
-
+	
 	i = 0;
 	while (i < n)
 	{
@@ -79,6 +81,30 @@ void	make_node(t_stack **a, unsigned int *id_arr, int n)
 		i++;
 	}
 }
+
+int init_validate(int argc, char **argv, int **arr, unsigned int **id_arr, t_stack *a, t_stack *b)
+{
+	int n;
+
+	if (argc < 2)
+		return (write(2, "Error\n", 6), 2);
+	n = argc - 1;
+	arr = malloc(sizeof(int) * n);
+	id_arr = malloc(sizeof(unsigned int) * n);
+	if (!(*arr) || !(*id_arr)
+		|| parse_and_store(*arr, argv, argc) || compare_n(*arr, n))
+	{
+		bury_all(*arr, *id_arr, a, b);
+		return (write(2, "Error\n", 6), 2);
+	}
+	if (!is_sorted(*arr, n))
+	{
+		bury_all(*arr, *id_arr, a, b);
+		return (0);
+	}
+	return (0);
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -91,18 +117,42 @@ int	main(int argc, char **argv)
 	n = argc - 1;
 	a = NULL;
 	b = NULL;
-	if (argc < 2)
-		return (write(2, "Error\n", 6), 1);
-	arr = malloc(sizeof(int) * n);
-	id_arr = malloc(sizeof(unsigned int) * n);
-	if (!arr || !id_arr)
-		return (write(2, "Error\n", 6), 1);
-	if (parse_and_store(arr, argv, argc))
-		return (write(2, "Error\n", 6), 1);
-	if (compare_n(arr, n))
-		return (write(2, "Error\n", 6), 1);
+	if (init_validate(argc, argv, &arr, &id_arr, a, b) != 1)
+		return (2);
 	rank_compress(arr, id_arr, n);
 	make_node(&a, id_arr, n);
 	push_and_sort(&a, &b, n);
 	bury_all(arr, id_arr, a, b);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	t_stack			*a;
+// 	t_stack			*b;
+// 	unsigned int	*id_arr;
+// 	int				*arr;
+// 	int				n;
+	
+// 	n = argc - 1;
+// 	a = NULL;
+// 	b = NULL;
+// 	if (argc < 2)
+// 		return (write(2, "Error\n", 6), 2);
+// 	arr = malloc(sizeof(int) * n);
+// 	id_arr = malloc(sizeof(unsigned int) * n);
+// 	if (!arr || !id_arr
+// 		|| parse_and_store(arr, argv, argc) || compare_n(arr, n))
+// 	{
+// 		bury_all(arr, id_arr, a, b);
+// 		return (write(2, "Error\n", 6), 2);
+// 	}
+// 	if (!is_sorted(arr, n))
+// 		{
+// 			bury_all(arr, id_arr, a, b);
+// 			return (0);
+// 		}
+// 	rank_compress(arr, id_arr, n);
+// 	make_node(&a, id_arr, n);
+// 	push_and_sort(&a, &b, n);
+// 	bury_all(arr, id_arr, a, b);
+// }

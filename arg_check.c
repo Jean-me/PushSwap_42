@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:45:41 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/04/30 15:16:21 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:46:01 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,20 @@ int	compare_n(int *arr, int n)
 		i++;
 	}
 	return (NUMBER);
+}
+
+int	is_sorted(int *arr, int n)
+{
+	int	i;
+
+	i = 0;
+	if (n < 2)
+		return (SORTED);
+	while (i < n - 1)
+	{
+		if (arr[i] > arr[i + 1])
+			return (NOT_SORTED);
+		i++;
+	}
+	return (SORTED);
 }

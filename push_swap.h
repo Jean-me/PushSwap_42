@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 19:58:07 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/04/30 16:46:05 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:27:38 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define NUMBER 0
 # define NOT_NUMBER 1
 # include <unistd.h>
+# define SORTED 0
+# define NOT_SORTED 1
 
 typedef struct s_stack
 {
@@ -59,4 +61,8 @@ void			bury_array(int *array, unsigned int *id_arr);
 void			bury_stack(t_stack *stack);
 void			bury_all(int *array, unsigned int *id_arr,
 					t_stack *stack_a, t_stack *stack_b);
+int				is_sorted(int *arr, int n);
+int				init_validate(int argc, char **argv, int **arr, unsigned int **id_arr, t_stack *a, t_stack *b);
+void			push_min_efficient(t_stack **a, t_stack **b);
+void			sort_five(t_stack **a, t_stack **b);
 #endif

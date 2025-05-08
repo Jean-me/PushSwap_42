@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 23:04:00 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/04/27 23:04:01 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:28:20 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	find_min_id(int *arr, bool *mask, int num)
 	i = 0;
 	while (i < num)
 	{
-		if (!mask[i] && arr[i] < min_v)
+		if (!mask[i] && arr[i] <= min_v)
 		{
 			min_v = arr[i];
 			min_id = i;
