@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 23:04:00 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/05/03 15:28:20 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:11:54 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,9 @@ int	get_max_bits(t_stack *stack)
 {
 	unsigned int	max;
 	int				bits;
-	int				count_bits;
 
 	max = 0;
 	bits = 0;
-	count_bits = -1;
 	while (stack)
 	{
 		if (stack->value > max)

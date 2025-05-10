@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graveyard.c                                        :+:      :+:    :+:   */
+/*   push_and_sort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 16:12:46 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/05/10 14:13:34 by mesasaki         ###   ########.fr       */
+/*   Created: 2025/05/10 14:53:36 by mesasaki          #+#    #+#             */
+/*   Updated: 2025/05/10 14:54:19 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 
-void	bury_array(int *array, unsigned int *id_arr)
+void	push_and_sort(t_stack **a, t_stack **b, int n)
 {
-	if (array)
-		free(array);
-	if (id_arr)
-		free(id_arr);
-}
-
-void	bury_stack(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	while (stack)
-	{
-		tmp = stack;
-		stack = stack->next;
-		free(tmp);
-	}
-}
-
-void	bury_all(int *array, unsigned int *id_arr, t_stack *stack_a,
-		t_stack *stack_b)
-{
-	bury_array(array, id_arr);
-	bury_stack(stack_a);
-	bury_stack(stack_b);
+	if (n > 5)
+		radix_sort(a, b);
+	else if (n > 4)
+		sort_five(a, b);
+	else if (n > 3)
+		sort_four(a, b);
+	else if (n > 2)
+		sort_three(a);
+	else if (n > 1)
+		sort_two(a);
 }

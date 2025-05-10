@@ -1,6 +1,6 @@
 # push_swap
 NAME = push_swap
-SRCS = main.c arg_check.c atoi.c push.c reverse_r.c rotate.c sort_two_or_three.c swap.c whisper_of_stacks.c graveyard.c sort_four_five.c
+SRCS = main.c arg_check.c atoi.c push.c reverse_r.c rotate.c sort_two_or_three.c swap.c whisper_of_stacks.c graveyard.c sort_four_five.c push_and_sort.c
 OBJS = $(SRCS:%.c=%.o)
 # Compiler
 CC = cc
