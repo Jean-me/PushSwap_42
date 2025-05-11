@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 19:42:25 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/05/10 14:54:23 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:36:25 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,6 @@ int	init_validate(int argc, char **argv, int **arr, unsigned int **id_arr)
 {
 	int	n;
 
-	if (argc < 2)
-	{
-		return (write(2, "Error\n", 6), 2);
-	}
 	n = argc - 1;
 	*arr = (int *)malloc(sizeof(int) * n);
 	*id_arr = (unsigned int *)malloc(sizeof(unsigned int) * n);
@@ -101,15 +97,20 @@ int	main(int argc, char **argv)
 	n = argc - 1;
 	a = NULL;
 	b = NULL;
-	if (init_validate(argc, argv, &arr, &id_arr) != 0)
-		return (2);
-	if (!is_sorted(arr, n))
+	if (n > 1)
 	{
-		bury_array(arr, id_arr);
-		return (0);
+		if (init_validate(argc, argv, &arr, &id_arr) != 0)
+			return (2);
+		if (!is_sorted(arr, n))
+			{
+				bury_array(arr, id_arr);
+				return (0);
+			}
+		rank_compress(arr, id_arr, n);
+		make_node(&a, id_arr, n);
+		push_and_sort(&a, &b, n);
+		bury_all(arr, id_arr, a, b);
 	}
-	rank_compress(arr, id_arr, n);
-	make_node(&a, id_arr, n);
-	push_and_sort(&a, &b, n);
-	bury_all(arr, id_arr, a, b);
+	else
+		return (0);
 }
