@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 19:42:25 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/05/11 17:36:25 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/11 18:33:57 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ int	main(int argc, char **argv)
 		if (init_validate(argc, argv, &arr, &id_arr) != 0)
 			return (2);
 		if (!is_sorted(arr, n))
-			{
-				bury_array(arr, id_arr);
-				return (0);
-			}
+		{
+			bury_array(arr, id_arr);
+			return (0);
+		}
 		rank_compress(arr, id_arr, n);
 		make_node(&a, id_arr, n);
 		push_and_sort(&a, &b, n);
