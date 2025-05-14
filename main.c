@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 19:42:25 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/05/11 18:33:57 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/05/14 19:51:43 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,25 +92,25 @@ int	main(int argc, char **argv)
 	t_stack			*b;
 	unsigned int	*id_arr;
 	int				*arr;
-	int				n;
 
-	n = argc - 1;
 	a = NULL;
 	b = NULL;
-	if (n > 1)
+	if (argc - 1 > 1)
 	{
 		if (init_validate(argc, argv, &arr, &id_arr) != 0)
 			return (2);
-		if (!is_sorted(arr, n))
+		if (!is_sorted(arr, argc - 1))
 		{
 			bury_array(arr, id_arr);
 			return (0);
 		}
-		rank_compress(arr, id_arr, n);
-		make_node(&a, id_arr, n);
-		push_and_sort(&a, &b, n);
+		rank_compress(arr, id_arr, argc - 1);
+		make_node(&a, id_arr, argc - 1);
+		push_and_sort(&a, &b, argc - 1);
 		bury_all(arr, id_arr, a, b);
 	}
-	else
-		return (0);
+	else if (argc - 1 == 1 && (is_number(argv[1]) == NOT_NUMBER
+			|| over_int(argv[1]) == NOT_NUMBER))
+		return (write(2, "Error\n", 6), 2);
+	return (0);
 }
